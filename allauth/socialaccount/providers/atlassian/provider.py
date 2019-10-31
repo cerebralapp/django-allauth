@@ -26,7 +26,7 @@ class AtlassianAccount(ProviderAccount):
 class AtlassianProvider(OAuth2Provider):
     id = 'atlassian'
     name = 'Atlassian'
-    account_class = AsanaAccount
+    account_class = AtlassianAccount
 
     def extract_uid(self, data):
         return str(data['account_id'])
