@@ -1,6 +1,7 @@
 from allauth.socialaccount import app_settings
 from allauth.socialaccount.providers.base import ProviderAccount
 from allauth.socialaccount.providers.oauth2.provider import OAuth2Provider
+from allauth.socialaccount.providers.oauth.provider import OAuthProvider
 
 
 class AtlassianAccount(ProviderAccount):
@@ -23,7 +24,7 @@ class AtlassianAccount(ProviderAccount):
     #         if value is not None
     #     )
 
-class AtlassianProvider(OAuth2Provider):
+class AtlassianProvider(OAuthProvider):
     id = 'atlassian'
     name = 'Atlassian'
     account_class = AtlassianAccount
@@ -34,6 +35,21 @@ class AtlassianProvider(OAuth2Provider):
     def extract_common_fields(self, data):
         return dict(email=data.get('email'),
                     name=data.get('name'))
+
+
+provider_classes = [EvernoteProvider]
+
+# class AtlassianProvider(OAuth2Provider):
+#     id = 'atlassian'
+#     name = 'Atlassian'
+#     account_class = AtlassianAccount
+
+#     def extract_uid(self, data):
+#         return str(data['account_id'])
+
+#     def extract_common_fields(self, data):
+#         return dict(email=data.get('email'),
+#                     name=data.get('name'))
 
 # class AtlassianProvider(OAuth2Provider):
 #     id = 'atlassian'
