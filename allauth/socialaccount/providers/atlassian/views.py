@@ -20,10 +20,14 @@ class AtlassianAuth2Adapter(OAuth2Adapter):
     # After successfully logging in, use access token to retrieve user info
     def complete_login(self, request, app, token, **kwargs):
         resp = requests.get(self.profile_url, params={'access_token': token.token})
-        extra_data = resp.json()
-        if app_settings.QUERY_EMAIL and not extra_data.get('email'):
-            extra_data['email'] = self.get_email(token)
-        return self.get_provider().sociallogin_from_response(request,extra_data)
+
+        extra_data = resp.json()['data']
+        return self.get_provider().sociallogin_from_response(request,
+                                                             extra_data)
+        # extra_data = resp.json()
+        # if app_settings.QUERY_EMAIL and not extra_data.get('email'):
+        #     extra_data['email'] = self.get_email(token)
+        # return self.get_provider().sociallogin_from_response(request,extra_data)
 
 oauth2_login = OAuth2LoginView.adapter_view(AtlassianAuth2Adapter)
 oauth2_callback = OAuth2CallbackView.adapter_view(AtlassianAuth2Adapter)
