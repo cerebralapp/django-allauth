@@ -11,9 +11,9 @@ from .provider import AtlassianProvider
 class AtlassianAuth2Adapter(OAuth2Adapter):
     provider_id = AtlassianProvider.id
     #access_token_url = 'https://example.com/applications/oauth2server/interface/oauth/token.php'
-    access_token_url = 'https://auth.atlassian.io/oauth2/token'
+    access_token_url = 'https://auth.atlassian.com/oauth/token'
     #authorize_url = 'https://example.com/applications/oauth2server/interface/oauth/authorize.php'
-    authorize_url = 'https://auth.atlassian.io/oauth2/authorize'
+    authorize_url = 'https://auth.atlassian.com/authorize'
     #profile_url = 'https://example.com/applications/oauth2server/interface/oauth/me.php'
     profile_url = 'https://auth.atlassian.io/api/2.0/users/me'
 
