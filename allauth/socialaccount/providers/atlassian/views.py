@@ -13,7 +13,7 @@ class AtlassianAuth2Adapter(OAuth2Adapter):
     #access_token_url = 'https://example.com/applications/oauth2server/interface/oauth/token.php'
     access_token_url = 'https://auth.atlassian.com/oauth/token'
     #authorize_url = 'https://example.com/applications/oauth2server/interface/oauth/authorize.php'
-    authorize_url = 'https://auth.atlassian.com/authorize/'
+    authorize_url = 'https://auth.atlassian.com/oauth/2.0/authorize/'
     #profile_url = 'https://example.com/applications/oauth2server/interface/oauth/me.php'
     profile_url = 'https://auth.atlassian.io/api/2.0/users/me'
 
