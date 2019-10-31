@@ -37,8 +37,6 @@ class AtlassianProvider(OAuthProvider):
                     name=data.get('name'))
 
 
-provider_classes = [EvernoteProvider]
-
 # class AtlassianProvider(OAuth2Provider):
 #     id = 'atlassian'
 #     name = 'Atlassian'
