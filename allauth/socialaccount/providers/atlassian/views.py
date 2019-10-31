@@ -11,13 +11,13 @@ from .provider import AtlassianProvider
 class AtlassianAuth2Adapter(OAuth2Adapter):
     provider_id = AtlassianProvider.id
     #access_token_url = 'https://example.com/applications/oauth2server/interface/oauth/token.php'
-    #access_token_url = 'https://auth.atlassian.com/oauth/token'
-    access_token_url = 'https://api.atlassian.com/oauth2/token'
+    access_token_url = 'https://auth.atlassian.com/oauth/token'
+    #access_token_url = 'https://api.atlassian.com/oauth2/token'
     #authorize_url = 'https://example.com/applications/oauth2server/interface/oauth/authorize.php'
-    #authorize_url = 'https://auth.atlassian.com/authorize/'
-    authorize_url = 'https://api.atlassian.com/oauth2/authorize/'
+    authorize_url = 'https://auth.atlassian.com/authorize/'
+    #authorize_url = 'https://api.atlassian.com/oauth2/authorize/'
     #profile_url = 'https://example.com/applications/oauth2server/interface/oauth/me.php'
-    profile_url = 'https://api.atlassian.com/oauth2/users/me'
+    profile_url = 'https://auth.atlassian.com/oauth/users/me'
 
     # After successfully logging in, use access token to retrieve user info
     def complete_login(self, request, app, token, **kwargs):
