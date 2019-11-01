@@ -29,13 +29,20 @@ class AtlassianAuth2Adapter(OAuth2Adapter):
     #access_token_url = 'https://api.atlassian.com/oauth2/token'
     #authorize_url = 'https://example.com/applications/oauth2server/interface/oauth/authorize.php'
     authorize_url = 'https://auth.atlassian.com/authorize/'
+    accessible_resources_url = 'https://api.atlassian.com/oauth/token/accessible-resources'
     #authorize_url = 'https://api.atlassian.com/oauth2/authorize/'
     #profile_url = 'https://example.com/applications/oauth2server/interface/oauth/me.php'
-    profile_url = 'https://auth.atlassian.com/oauth/users/me'
+    #profile_url = 'https://auth.atlassian.com/oauth/users/me'
 
     # After successfully logging in, use access token to retrieve user info
     def complete_login(self, request, app, token, **kwargs):
         print("token",token.token)
+        resp = requests.get(self.accessible_resources_url, params={'access_token': token.token})
+        print("accessible_resources_url resp ****", resp)
+        sites = resp.json()
+        print("sites******", sites)
+
+        
         resp = requests.get(self.profile_url, params={'access_token': token.token})
         extra_data = resp.json()['data']
         return self.get_provider().sociallogin_from_response(request, extra_data)
