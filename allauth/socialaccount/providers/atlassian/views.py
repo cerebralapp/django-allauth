@@ -53,7 +53,7 @@ class AtlassianAuth2Adapter(OAuth2Adapter):
                 site_id = site['id']
                 print("site_id", site_id)
         cloud_id = site_id
-        base_url = "https://api.atlassian.com/ex/jira/#"+cloud_id
+        base_url = "https://api.atlassian.com/ex/jira/"+cloud_id
         myself_url = base_url+"/rest/api/3/myself"
 
         myself_resp = requests.get(myself_url, headers=header)
