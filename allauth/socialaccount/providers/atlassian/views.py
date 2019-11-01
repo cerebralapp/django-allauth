@@ -40,16 +40,30 @@ class AtlassianAuth2Adapter(OAuth2Adapter):
         access_token = "access_token "+token.token
         #resp = access_token.get(self.accessible_resources_url).body
         #header = {'Authorization': 'access_token token.token'}
-        header = {'Authorization': 'Bearer %s' % token.token}
+        header = {'Authorization': 'access_token %s' % token.token}
         resp = requests.get(self.accessible_resources_url, headers=header)
         #resp = requests.get(self.accessible_resources_url, params={'access_token': token.token})
         print("accessible_resources_url resp ****", resp)
         sites = resp.json()
+        jira_user_scope = 'read:jira-user'
         print("sites******", sites)
 
+        for site in sites:
+            if jira_user_scope in site['scopes']:
+                site_id = site['id']
+                print("site_id", site_id)
+        cloud_id = site_id
+        base_url = "https://api.atlassian.com/ex/jira/#"+cloud_id
+        myself_url = base_url+"/rest/api/3/myself"
 
-        resp = requests.get(self.profile_url, params={'access_token': token.token})
-        extra_data = resp.json()['data']
+        myself_resp = requests.get(self.myself_url, headers=header)
+
+        extra_data=myself_resp.json()
+
+        print("extra_data", extra_data)
+
+        # resp = requests.get(self.profile_url, params={'access_token': token.token})
+        # extra_data = resp.json()['data']
         return self.get_provider().sociallogin_from_response(request, extra_data)
         # extra_data = resp.json()
         # if app_settings.QUERY_EMAIL and not extra_data.get('email'):
