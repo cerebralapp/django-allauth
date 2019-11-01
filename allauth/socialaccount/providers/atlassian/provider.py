@@ -24,10 +24,29 @@ class AtlassianAccount(ProviderAccount):
     #         if value is not None
     #     )
 
-class AtlassianProvider(OAuthProvider):
+
+# class AtlassianProvider(OAuth2Provider):
+#     id = 'atlassian'
+#     name = 'Atlassian'
+#     account_class = AtlassianAccount
+
+#     def extract_uid(self, data):
+#         return str(data['account_id'])
+
+#     def extract_common_fields(self, data):
+#         return dict(email=data.get('email'),
+#                     name=data.get('name'))
+
+class AtlassianProvider(OAuth2Provider):
     id = 'atlassian'
     name = 'Atlassian'
     account_class = AtlassianAccount
+
+    def get_default_scope(self):
+        scope = ['read:jira-work']
+        if app_settings.QUERY_EMAIL:
+            scope.append('user:email')
+        return scope
 
     def extract_uid(self, data):
         return str(data['account_id'])
@@ -35,37 +54,6 @@ class AtlassianProvider(OAuthProvider):
     def extract_common_fields(self, data):
         return dict(email=data.get('email'),
                     name=data.get('name'))
-
-
-# class AtlassianProvider(OAuth2Provider):
-#     id = 'atlassian'
-#     name = 'Atlassian'
-#     account_class = AtlassianAccount
-
-#     def extract_uid(self, data):
-#         return str(data['account_id'])
-
-#     def extract_common_fields(self, data):
-#         return dict(email=data.get('email'),
-#                     name=data.get('name'))
-
-# class AtlassianProvider(OAuth2Provider):
-#     id = 'atlassian'
-#     name = 'Atlassian'
-#     account_class = AtlassianAccount
-
-#     def get_default_scope(self):
-#         scope = []
-#         if app_settings.QUERY_EMAIL:
-#             scope.append('user:email')
-#         return scope
-
-#     def extract_uid(self, data):
-#         return str(data['account_id'])
-
-#     def extract_common_fields(self, data):
-#         return dict(email=data.get('email'),
-#                     name=data.get('name'))
 
 
 provider_classes = [AtlassianProvider]
