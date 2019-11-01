@@ -6,13 +6,6 @@ import requests
 
 from allauth.socialaccount.providers.oauth2.views import (OAuth2Adapter,OAuth2LoginView, OAuth2CallbackView)
 
-from allauth.socialaccount.providers.oauth.views import (
-    OAuthAdapter,
-    OAuthCallbackView,
-    OAuthLoginView,
-)
-from allauth.socialaccount.providers.oauth.client import OAuth
-
 from .provider import AtlassianProvider
 
 # class AtlassianOAuthAdapter(OAuthAdapter):
@@ -42,8 +35,8 @@ class AtlassianAuth2Adapter(OAuth2Adapter):
 
     # After successfully logging in, use access token to retrieve user info
     def complete_login(self, request, app, token, **kwargs):
-        print("token",token)
-
+        print("token",token.token)
+        resp = requests.get(self.profile_url, params={'access_token': token.token})
         extra_data = resp.json()['data']
         return self.get_provider().sociallogin_from_response(request, extra_data)
         # extra_data = resp.json()

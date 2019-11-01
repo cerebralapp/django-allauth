@@ -43,7 +43,7 @@ class AtlassianProvider(OAuth2Provider):
     account_class = AtlassianAccount
 
     def get_default_scope(self):
-        scope = ['read:jira-work']
+        scope = []
         if app_settings.QUERY_EMAIL:
             scope.append('user:email')
         return scope
