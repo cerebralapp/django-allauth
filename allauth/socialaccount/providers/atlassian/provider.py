@@ -49,11 +49,11 @@ class AtlassianProvider(OAuth2Provider):
         return scope
 
     def extract_uid(self, data):
-        return str(data['account_id'])
+        return str(data['accountId'])
 
     def extract_common_fields(self, data):
-        return dict(email=data.get('email'),
-                    name=data.get('name'))
+        return dict(email=data.get('emailAddress'),
+                    name=data.get('displayName'))
 
 
 provider_classes = [AtlassianProvider]
