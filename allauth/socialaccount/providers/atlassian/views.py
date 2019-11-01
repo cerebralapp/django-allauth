@@ -37,12 +37,14 @@ class AtlassianAuth2Adapter(OAuth2Adapter):
     # After successfully logging in, use access token to retrieve user info
     def complete_login(self, request, app, token, **kwargs):
         print("token",token.token)
-        resp = requests.get(self.accessible_resources_url, params={'access_token': token.token})
+        access_token = token.token
+        resp = access_token.get(self.accessible_resources_url).body
+        #resp = requests.get(self.accessible_resources_url, params={'access_token': token.token})
         print("accessible_resources_url resp ****", resp)
         sites = resp.json()
         print("sites******", sites)
 
-        
+
         resp = requests.get(self.profile_url, params={'access_token': token.token})
         extra_data = resp.json()['data']
         return self.get_provider().sociallogin_from_response(request, extra_data)
