@@ -40,7 +40,7 @@ class AtlassianAuth2Adapter(OAuth2Adapter):
         access_token = "access_token "+token.token
         #resp = access_token.get(self.accessible_resources_url).body
         #header = {'Authorization': 'access_token token.token'}
-        header = {'Authorization':access_token}
+        header = {'Authorization': 'access_token %s' % token.token}
         resp = requests.get(self.accessible_resources_url, headers=header)
         #resp = requests.get(self.accessible_resources_url, params={'access_token': token.token})
         print("accessible_resources_url resp ****", resp)
