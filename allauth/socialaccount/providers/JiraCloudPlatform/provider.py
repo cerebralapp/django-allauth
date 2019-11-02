@@ -38,7 +38,7 @@ class JiraCloudPlatformAccount(ProviderAccount):
 #                     name=data.get('name'))
 
 class JiraCloudPlatformProvider(OAuth2Provider):
-    id = 'jira-cloud-platform'
+    id = 'jiracloudplatform'
     name = 'JiraCloudPlatform'
     account_class = JiraCloudPlatformAccount
 
