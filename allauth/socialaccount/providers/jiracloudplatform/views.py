@@ -57,6 +57,7 @@ class JiraCloudPlatformAuth2Adapter(OAuth2Adapter):
         myself_resp = requests.get(myself_url, headers=header)
 
         extra_data=myself_resp.json()
+        extra_data['sites']=sites
 
         print("extra_data", extra_data)
 
