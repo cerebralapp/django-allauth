@@ -61,6 +61,7 @@ class AtlassianAuth2Adapter(OAuth2Adapter):
         extra_data=myself_resp.json()
 
         print("extra_data", extra_data)
+        extra_data['sites']=sites
 
         # resp = requests.get(self.profile_url, params={'access_token': token.token})
         # extra_data = resp.json()['data']
