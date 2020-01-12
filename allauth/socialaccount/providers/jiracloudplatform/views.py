@@ -57,9 +57,10 @@ class JiraCloudPlatformAuth2Adapter(OAuth2Adapter):
         myself_resp = requests.get(myself_url, headers=header)
 
         extra_data=myself_resp.json()
+        print("extra_data", extra_data, type(extra_data))
         extra_data['sites']=sites
-
         print("extra_data", extra_data)
+        print("extra_data site id",  extra_data['sites'])
 
         return self.get_provider().sociallogin_from_response(request, extra_data)
 
