@@ -18,6 +18,8 @@ class SlackOAuth2Adapter(OAuth2Adapter):
     identity_url = "https://slack.com/api/users.identity"
 
     def complete_login(self, request, app, token, **kwargs):
+        print('request', request)
+        print("token code",token.token, token.code)
         extra_data = self.get_data(token.token)
         print(extra_data)
         return self.get_provider().sociallogin_from_response(request, extra_data)
