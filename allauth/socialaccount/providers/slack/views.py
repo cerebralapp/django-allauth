@@ -30,6 +30,8 @@ class SlackOAuth2Adapter(OAuth2Adapter):
         resp = requests.get(self.identity_url, params={"token": token})
         resp = resp.json()
 
+        print('resp ', resp)
+
         if not resp.get("ok"):
             print('identity error')
             raise OAuth2Error()
