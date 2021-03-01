@@ -19,6 +19,7 @@ class SlackOAuth2Adapter(OAuth2Adapter):
 
     def complete_login(self, request, app, token, **kwargs):
         extra_data = self.get_data(token.token)
+        print(extra_data)
         return self.get_provider().sociallogin_from_response(request, extra_data)
 
     def get_data(self, token):
@@ -27,6 +28,7 @@ class SlackOAuth2Adapter(OAuth2Adapter):
         resp = resp.json()
 
         if not resp.get("ok"):
+            print('identity error')
             raise OAuth2Error()
 
         return resp
