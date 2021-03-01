@@ -16,8 +16,9 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': os.path.join(PROJECT_ROOT, 'example.db'), # Or path to database file if using sqlite3.
+        'ENGINE': 'django.db.backends.sqlite3',  # Add 'postgresql_psycopg2', 'postgresql',
+                                                 # 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': os.path.join(PROJECT_ROOT, 'example.db'),  # Or path to database file if using sqlite3.
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
@@ -48,7 +49,7 @@ USE_I18N = True
 # calendars according to the current locale
 USE_L10N = True
 
-LOCALE_PATHS = ( os.path.join(PROJECT_ROOT, 'locale'), )
+LOCALE_PATHS = (os.path.join(PROJECT_ROOT, 'locale'), )
 
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
@@ -82,7 +83,7 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    # 'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
 # Make this unique, and don't share it with anybody.
@@ -93,11 +94,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            # allauth templates: you could copy this directory into your
-            # project and tweak it according to your needs
-            # os.path.join(PROJECT_ROOT, 'templates', 'uniform', 'allauth'),
-            # example project specific templates
-            os.path.join(PROJECT_ROOT, 'templates', 'plain', 'example'),
+            os.path.join(PROJECT_ROOT, 'templates'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -125,8 +122,6 @@ AUTHENTICATION_BACKENDS = (
 
 ROOT_URLCONF = 'example.urls'
 
-
-
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -142,6 +137,7 @@ INSTALLED_APPS = (
     'allauth.socialaccount.providers.dropbox',
     'allauth.socialaccount.providers.azure',
     'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.edx',
     'allauth.socialaccount.providers.evernote',
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.github',
@@ -174,8 +170,9 @@ AUTH_PASSWORD_VALIDATORS = [
     }
 ]
 
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 try:
-    from local_settings import *  # noqa
+    from .local_settings import *  # noqa
 except ImportError:
     pass
