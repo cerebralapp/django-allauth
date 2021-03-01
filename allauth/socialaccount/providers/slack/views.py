@@ -20,8 +20,8 @@ class SlackOAuth2Adapter(OAuth2Adapter):
     def complete_login(self, request, app, token, **kwargs):
         print('request', request)
         print("token code",token.token)
-        # extra_data = self.get_data(token.token)
-        extra_data = token.token
+        extra_data = self.get_data(token.token)
+        # extra_data = token.token
         print(extra_data)
         return self.get_provider().sociallogin_from_response(request, extra_data)
 
